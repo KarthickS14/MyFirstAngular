@@ -1,0 +1,30 @@
+<app-home-page></app-home-page>
+<div class='container'>
+    <div class='row'>
+        <div class='col-sm-10'>
+            <div class="panel panel-primary" style="margin-top: 10rem; margin-left:30px;">
+                <div class="panel-heading">{{hospitalInfo.city}}</div>
+                <div class="panel-body">
+                    <table class='table table-bordered table-dark'>
+                        <thead>
+                            <tr>
+                                <th>HOSPITAL NAME</th>
+                                <th>ADDRESS</th>
+                                <th>Total Beds</th>
+                                <th>AVAILABLE NOW</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospitalInfo of hospitalDetails">
+                                <td>{{ hospitalInfo.hname}} </td>
+                                <td>{{ hospitalInfo.haddress}}</td>
+                                <td>{{ hospitalInfo.nobeds}}</td>
+                                <td>{{ hospitalInfo.avabeds}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
