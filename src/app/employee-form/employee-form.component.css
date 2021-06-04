@@ -1,0 +1,13 @@
+button {
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+mat-radio-button {
+    font-size: x-small;
+    margin-left: 5rm;
+}
+
+ul {
+    text-decoration: none;
+}

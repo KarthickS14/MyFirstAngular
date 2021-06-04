@@ -12,6 +12,7 @@ export class HospitalDataComponent implements OnInit {
   cities : CityModel[];
   hospitalDetails : CityModel[];
   cityId: string;
+  cityname: CityModel;
   constructor(private citydata: CityData,private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,6 +21,7 @@ export class HospitalDataComponent implements OnInit {
       if(paramMap.has('id')){
         this.cityId = paramMap.get('id');
         this.hospitalDetails =  this.cities.filter(i => i.id === this.cityId);
+        this.cityname = this.hospitalDetails.find(n => n.city);
       }
     });
   }
