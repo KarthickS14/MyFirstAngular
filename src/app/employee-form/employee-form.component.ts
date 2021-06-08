@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-form',
@@ -7,7 +7,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./employee-form.component.css']
 })
 export class EmployeeFormComponent implements OnInit {
-  genders = ['male','female']; 
   employeeForm : FormGroup;
   name = '';
   number='';
@@ -16,7 +15,7 @@ export class EmployeeFormComponent implements OnInit {
   doj = '';
   skills = '';
 
-  skillAdded ='';
+  // skillAdded ='';
   tableData : null;
   isShow = false;
 
@@ -29,9 +28,10 @@ export class EmployeeFormComponent implements OnInit {
       'gender' : new FormControl('null'),
       'age' : new FormControl(null,[Validators.required,Validators.minLength(2)]),
       'doj' : new FormControl(null,[Validators.required]),
-      'skills' : new FormControl(null,[Validators.required,Validators.minLength(4)])
-   
+      'skills' : new FormArray([])
       });
+
+     
       // this.employeeForm.setValue({
       //   'gender' : 'male'
       // });
@@ -44,14 +44,19 @@ export class EmployeeFormComponent implements OnInit {
     this.age = this.employeeForm.get('age').value;
     this.doj = this.employeeForm.get('doj').value;
     this.skills = this.employeeForm.get('skills').value;
-
     this.isShow = true;
   }
-  onAdd(addskill){
-    console.log(addskill.value);
-    this.skillAdded = addskill.value;
+
+  getcontrol(){
+    return (<FormArray>this.employeeForm.get('skills')).controls;
   }
-  onClear(){
-  this.skillAdded = null;
+  onAdd(){
+    const controls = new FormControl(null,Validators.required);
+    (<FormArray>this.employeeForm.get('skills')).push(controls);
+    // console.log(addskill.value);
+    // this.skillAdded = addskill.value;
+  }
+  onClear(index: number){
+    (<FormArray>this.employeeForm.get('skills')).removeAt(index);
   }
 }

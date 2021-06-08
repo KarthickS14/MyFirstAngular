@@ -1,7 +1,7 @@
 <div class='container'>
     <div class='row'>
         <div class='col-sm-8 col-sm-offset-2'>
-            <div>
+            <div *ngIf="!isShow">
                 <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
                     <mat-form-field class="col-sm-8">
                         <mat-label>Employee Name</mat-label>
@@ -23,25 +23,15 @@
                         <mat-label>Date Of Join</mat-label>
                         <input matInput type="date" name="doj" formControlName="doj">
                     </mat-form-field>
-                    <mat-form-field class="col-sm-8">
+                    <h3 class='col-sm-8'>Add Your Skills</h3>
+                    <mat-form-field class="col-sm-8" formArrayName="skills" *ngFor="let skillAdd of getcontrol(); let i = index">
                         <mat-label>Skills</mat-label>
-                        <input matInput name="skills" formControlName="skills" #addskill>
+                        <input matInput name="skills" [formControlName]="i">
+                        <button color="warn" type="button" class='pull-right' (click)="onClear(i)">X</button>
                     </mat-form-field>
-                    <button mat-mini-fab color="primary" type="button" class='pull-left' style="size: 10px;" (click)="onAdd(addskill)">Add</button>
-                    <button mat-mini-fab color="primary" type="button" class='pull-left' style="size: 10px;" (click)="onClear()">Clear</button>
+                    <button mat-mini-fab color="primary" type="button" class='pull-left' style="size: 10px;" (click)="onAdd()">Add</button>
                     <div class='col-sm-8'>
-                        <p>{{skillAdded}}</p>
                     </div>
-                    <!-- <ul class="pull-left" appDropdown #dropDown>
-                        <li class='dropdown'><a role="button" style="cursor: pointer;" class="dropdown-toggle"><span><button mat-mini-fab color="primary" type="button">+</button></span>                    
-                        </a></li>
-                        <ul class='dropdown-menu'>
-                            <li><a style="cursor: pointer;" (click)='angular()'>Angular</a></li>
-                            <li><a style="cursor: pointer;" (click)='node()'>Node</a></li>
-                            <li><a style="cursor: pointer;" (click)='php()'>Php</a></li>
-                            <li><a style="cursor: pointer;" (click)='react()'>React</a></li>
-                        </ul>
-                    </ul> -->
                     <div class='col-sm-8'>
                         <button mat-raised-button color="primary" class='pull-right' type="submit">Save</button>
                         <button mat-raised-button color="warn" class='pull-right'>Cancel</button>

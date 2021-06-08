@@ -6,9 +6,11 @@
             </div>
             <div class='collapse navbar-collapse pull-right'>
                 <ul class='nav navbar-nav'>
-                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/home">HOME <span class='glyphicon glyphicon-home'></span></a>
+                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/home" *ngIf="isAuthenticated">HOME <span class='glyphicon glyphicon-home'></span></a>
                     </li>
-                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/employeeForm">Employee Form</a></li>
+                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/employeeForm" *ngIf="isAuthenticated">Employee Form</a></li>
+                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/loginPage" *ngIf="!isAuthenticated">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
+                    <li routerLinkActive="active"><a style="cursor: pointer;" routerLink="/loginPage" *ngIf="isAuthenticated" (click)="Onlogout()">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
                 </ul>
             </div>
         </div>
